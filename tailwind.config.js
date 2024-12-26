@@ -5,7 +5,17 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      // fontFamily: {
+      //   robotHeader: ["Space Grotesk", "sans-serif"],
+      //   text: ["Space Grotesk", "sans-serif"],
+      // },
+      colors: {
+        // primaryColor: "#222222",
+        // secondaryColor: "#6f6f6f",
+      
+      },
+    },
   },
   plugins: [],
 }
