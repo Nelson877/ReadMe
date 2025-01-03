@@ -1,16 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ForgotImage from "../../assets/images/forgotImage.webp";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { Link } from "react-router-dom";
+import Loading from "../Loading/Loading";
 
 const Forgot = () => {
   const [email, setEmail] = useState("");
   const [studentId, setStudentId] = useState("");
+  const[isLoading, setIsLoading] = useState(true);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Add password reset logic here
   };
+
+useEffect(() => {
+    const timer = setTimeout(() =>{
+        setIsLoading(false);
+    }, 2000)
+
+    return() => clearTimeout(timer)
+}, []);
+
+
+if(isLoading) {
+    return <Loading/>
+}
+
 
   return (
     <div className='min-h-screen bg-white flex'>
