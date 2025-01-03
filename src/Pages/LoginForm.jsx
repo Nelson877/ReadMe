@@ -11,11 +11,14 @@ const LoginForm = () => {
   const navigate = useNavigate(); // Add this hook
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        setIsSidebarOpen(false);
+      }
+    };
 
-    return () => clearTimeout(timer);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   if (isLoading) {
