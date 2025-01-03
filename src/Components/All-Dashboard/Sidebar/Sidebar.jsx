@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
 import {
-  FaHeadphones,
-  FaFolderOpen,
-  FaUserFriends,
   FaCog,
-  FaQuestionCircle,
   FaBars,
   FaTimes,
-  FaChevronLeft,
-  FaChevronRight
 } from "react-icons/fa";
-import { FaRegCalendarCheck } from "react-icons/fa";
+// import { FaRegCalendarCheck } from "react-icons/fa";
+import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
 import { MdOutlineHomeWork } from "react-icons/md";
+import { IoLibrarySharp } from "react-icons/io5";
+import { GrFavorite } from "react-icons/gr";
+import { MdOutlineSupportAgent } from "react-icons/md";
+import { HiOutlineLogout } from "react-icons/hi";
 import Profile from "../../../assets/images/profile.png";
+import { GiCloudDownload } from "react-icons/gi";
+import { SiAudiobookshelf } from "react-icons/si";
 import Classroom from "../Classroom/Classroom";
 import Homework from "../Homework/Homework";
 import AudioBooks from "../AudioBooks/AudioBooks";
@@ -20,6 +21,8 @@ import MyLibrary from "../MyLibrary/MyLibrary";
 import Classmates from "../Classmates/Classmates";
 import Settings from "../Settings/Settings";
 import Help from "../Help/Help";
+import Suppor from "../Suppor/Suppor";
+import Logout from "../Logout/Logout";
 
 const Sidebar = () => {
   const [activeSection, setActiveSection] = useState("Classroom");
@@ -54,33 +57,36 @@ const Sidebar = () => {
 
   const renderContent = () => {
     switch (activeSection) {
-      case "Classroom":
+      case "Discover":
         return <Classroom />;
-      case "Homework":
+      case "Download":
         return <Homework />;
       case "Audio Books":
         return <AudioBooks />;
       case "My Library":
         return <MyLibrary />;
-      case "Classmates":
+      case "Favorite":
         return <Classmates />;
       case "Settings":
         return <Settings />;
-      case "Help":
-        return <Help />;
+      case "Suppor":
+        return <Suppor/>;
+        case "Logout":
+            return <Logout />;
       default:
         return <Classroom />;
     }
   };
 
   const menuItems = [
-    { id: "Classroom", icon: <MdOutlineHomeWork size={20} />, label: "Classroom" },
-    { id: "Homework", icon: <FaRegCalendarCheck size={20} />, label: "Homework" },
-    { id: "Audio Books", icon: <FaHeadphones size={20} />, label: "Audio Books" },
-    { id: "My Library", icon: <FaFolderOpen size={20} />, label: "My Library" },
-    { id: "Classmates", icon: <FaUserFriends size={20} />, label: "Classmates" },
+    { id: "Discover", icon: <MdOutlineHomeWork size={20} />, label: "Discover" },
+    { id: "My Library", icon: <IoLibrarySharp size={20} />, label: "My Library" },
+    { id: "Download", icon: <GiCloudDownload size={20} />, label: "Download" },
+    { id: "Audio Books", icon: <SiAudiobookshelf size={20} />, label: "Audio Books" },
+    { id: "Favorite", icon: <GrFavorite size={20} />, label: "Favorite" },
     { id: "Settings", icon: <FaCog size={20} />, label: "Settings" },
-    { id: "Help", icon: <FaQuestionCircle size={20} />, label: "Help" }
+    { id: "Suppor", icon: <MdOutlineSupportAgent size={20} />, label: "Suppor" },
+    { id: "Logout", icon: <HiOutlineLogout  size={20} />, label: "Logout" }
   ];
 
   const SidebarContent = ({ showLabels = true }) => (
@@ -90,7 +96,7 @@ const Sidebar = () => {
         onClick={() => setIsDesktopSidebarOpen(!isDesktopSidebarOpen)}
         className="hidden lg:flex absolute -right-4 top-8 w-8 h-8 bg-white rounded-full shadow-md items-center justify-center text-gray-600 hover:bg-gray-50"
       >
-        {isDesktopSidebarOpen ? <FaChevronLeft size={16} /> : <FaChevronRight size={16} />}
+        {isDesktopSidebarOpen ? <FaAngleLeft size={16} /> : <FaAngleRight size={16} />}
       </button>
 
       {/* Profile Section */}
