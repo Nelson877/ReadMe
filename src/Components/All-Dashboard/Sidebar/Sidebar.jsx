@@ -107,7 +107,7 @@ const Sidebar = () => {
             alt="Profile"
             className="w-16 h-16 rounded-full mb-4"
           />
-          {showLabels && <h3 className="text-xl font-medium text-gray-800">Kamayel Alpha</h3>}
+          {showLabels && <h3 className="text-xl font-medium text-gray-800">Dzik Nelson</h3>}
         </div>
       </div>
 
@@ -135,7 +135,7 @@ const Sidebar = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-200">
       {/* Mobile Menu Button */}
       <div className="lg:hidden fixed top-4 left-4 z-50">
         <button

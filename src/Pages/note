@@ -1,0 +1,26 @@
+ const books = [
+    {
+      title: "Bedtime Storybook Library",
+      author: "Morgan Housel",
+      cover: "https://m.media-amazon.com/images/I/81wVn9L-KfL._AC_UF1000,1000_QL80_.jpg",
+    },
+    {
+      title: "Disney Classic Storybook Collection",
+      author: "Matt Ridley",
+      cover: "https://books.disney.com/content/uploads/2021/06/1368065791-scaled.jpg",
+    },
+    {
+      title: "Animals Storybook Collection",
+      author: "Paul Jarvis",
+      cover: "https://images.booksense.com/images/980/041/9781368041980.jpg",
+    },
+    {
+      title: "Storybook Collection",
+      author: "James Clear",
+      cover: "https://m.media-amazon.com/images/I/915qUAO-2-L._AC_UF1000,1000_QL80_.jpg",
+    }
+  ];
+
+//   w-full bg-gray-50 mt-10 rounded-xl
+
+//   bg-blue-200 p-1 rounded-md
