@@ -19,10 +19,10 @@ import Homework from "../Homework/Homework";
 import AudioBooks from "../AudioBooks/AudioBooks";
 import MyLibrary from "../MyLibrary/MyLibrary";
 import Classmates from "../Classmates/Classmates";
-import Settings from "../Settings/Settings";
 import Help from "../Help/Help";
 import Suppor from "../Suppor/Suppor";
 import Logout from "../Logout/Logout";
+import SettingPage from "../SettingPaage/SettingPage";
 
 const Sidebar = () => {
   const [activeSection, setActiveSection] = useState("Classroom");
@@ -67,8 +67,8 @@ const Sidebar = () => {
         return <MyLibrary />;
       case "Favorite":
         return <Classmates />;
-      case "Settings":
-        return <Settings />;
+      case "SettingPage":
+        return <SettingPage />;
       case "Suppor":
         return <Suppor/>;
         case "Logout":
@@ -84,7 +84,7 @@ const Sidebar = () => {
     { id: "Download", icon: <GiCloudDownload size={20} />, label: "Download" },
     { id: "Audio Books", icon: <SiAudiobookshelf size={20} />, label: "Audio Books" },
     { id: "Favorite", icon: <GrFavorite size={20} />, label: "Favorite" },
-    { id: "Settings", icon: <FaCog size={20} />, label: "Settings" },
+    { id: "SettingPage", icon: <FaCog size={20} />, label: "Settings" },
     { id: "Suppor", icon: <MdOutlineSupportAgent size={20} />, label: "Suppor" },
     { id: "Logout", icon: <HiOutlineLogout  size={20} />, label: "Logout" }
   ];
