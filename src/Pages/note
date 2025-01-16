@@ -24,3 +24,4 @@
 //   w-full bg-gray-50 mt-10 rounded-xl
 
 //   bg-blue-200 p-1 rounded-md
+import { FaAngleRight} from "react-icons/fa";
