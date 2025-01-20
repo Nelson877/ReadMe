@@ -5,7 +5,7 @@ const AccountManagement = () => {
   const [showDeleteAccount, setShowDeleteAccount] = useState(false);
 
   const handleDeleteClick = () => {
-    setShowDeleteAccount(true);
+    setShowDeleteAccount((prevState) => !prevState); // Toggle the state
   };
 
   const handleCloseModal = () => {
@@ -17,10 +17,10 @@ const AccountManagement = () => {
       <h2 className="text-lg font-semibold mb-2">Account Management</h2>
       <p className="text-sm text-gray-600">Manage your account settings and preferences.</p>
       <button 
-        className="mt-2 px-4 py-2  bg-orange-500 text-white rounded-md hover:bg-orange-600"
+        className="mt-2 px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600"
         onClick={handleDeleteClick}
       >
-        Delete Account
+        {showDeleteAccount ? 'Delete Account' : 'Delete Account'}
       </button>
       {showDeleteAccount && <DeleteAccount onClose={handleCloseModal} />}
     </div>
