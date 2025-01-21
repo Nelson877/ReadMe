@@ -33,7 +33,7 @@ const EditProfile = () => {
   }
 
   return (
-    <div className="max-w-md mx-auto bg-white shadow-md rounded-md p-6">
+    <div className="p-6">
       <h2 className="text-2xl font-bold text-gray-800 mb-4">Edit Profile</h2>
       <form onSubmit={handleFormSubmit} className="space-y-4">
         {/* Name Field */}
