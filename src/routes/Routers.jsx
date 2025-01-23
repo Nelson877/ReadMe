@@ -19,7 +19,7 @@ const Routers = () => {
         <Route path="/new-student" element={<Register />} />
         <Route path="/library-card" element={<LibraryCard />} />
         <Route path="/get-library-id-now" element={<LibraryId />} />
-        <Route path="/user-readme-dash-board" element={<Dashboard />} />
+        <Route path="/" element={<Dashboard />} />
       </Routes>
     </Router>
   );
