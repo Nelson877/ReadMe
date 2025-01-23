@@ -10,6 +10,7 @@ const FeedbackForm  = ({ feedback, setFeedback, onSubmit }) => {
       <textarea
         id="feedback"
         value={feedback}
+        required={true}
         onChange={(e) => setFeedback(e.target.value)}
         className="w-full h-32 px-4 py-3 outline-none rounded-lg border border-slate-200 text-slate-900 text-sm placeholder:text-slate-400"
         placeholder="Your feedback helps us improve our service..."
