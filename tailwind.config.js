@@ -4,6 +4,7 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: 'class', // Add this line to enable dark mode
   theme: {
     extend: {
       // fontFamily: {
@@ -13,10 +14,8 @@ export default {
       colors: {
         // primaryColor: "#222222",
         // secondaryColor: "#6f6f6f",
-      
       },
     },
   },
   plugins: [],
 }
-
