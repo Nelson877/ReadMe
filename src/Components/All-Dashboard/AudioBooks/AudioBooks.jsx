@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import Audio from "./Audio";
 
 const AudioBooks = () => {
   return (
-    <div>AudioBooks</div>
-  )
-}
+    <div clas>
+      <Audio />
+    </div>
+  );
+};
 
-export default AudioBooks
+export default AudioBooks;
