@@ -1,50 +1,18 @@
 import React, { useState } from "react";
 import { Download, Heart } from "lucide-react";
+import {bestbooks} from "../../../AllAPI/api";
 
 const MyLibraryBooks = () => {
   const [favorites, setFavorites] = useState(new Set());
+  const [searchTerm, setSearchTerm] = useState("");
 
-  const books = [
-    {
-      id: 1,
-      title: "Design Engineering Handbook",
-      author: "By Invision",
-      progress: 64,
-      coverUrl: "/api/placeholder/200/300",
-    },
-    {
-      id: 2,
-      title: "Product Development",
-      author: "By UXPin",
-      progress: 77,
-      coverUrl: "/api/placeholder/200/300",
-    },
-    {
-      id: 3,
-      title: "The Lean Startup",
-      author: "By Eric Ries",
-      progress: 82,
-      coverUrl: "/api/placeholder/200/300",
-    },
-    {
-      id: 4,
-      title: "Enterprise Design Sprints",
-      author: "By Invision",
-      progress: 90,
-      coverUrl: "/api/placeholder/200/300",
-    },
-    {
-      id: 5,
-      title: "SPRINT",
-      author: "By Jake Knapp",
-      progress: 100,
-      coverUrl: "/api/placeholder/200/300",
-    },
-  ];
+  const filteredBestBooks = bestbooks.filter((book) =>
+    book.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6'>
-      {books.map((book) => (
+      {filteredBestBooks.map((book) => (
         <div
           key={book.id}
           className='bg-white rounded-lg shadow-md overflow-hidden'

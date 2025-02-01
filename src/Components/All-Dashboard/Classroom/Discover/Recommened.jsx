@@ -1,33 +1,13 @@
 import React, { useState } from 'react';
 import { FaAngleRight } from "react-icons/fa";
 import { X } from "lucide-react";
+import { initialBooks } from '../../../AllAPI/api';
 
 const Recommended = () => {
   const [showAll, setShowAll] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
 
-  const initialBooks = [
-    {
-      title: "Bedtime Storybook Library",
-      author: "Morgan Housel",
-      cover: "https://m.media-amazon.com/images/I/81wVn9L-KfL._AC_UF1000,1000_QL80_.jpg",
-    },
-    {
-      title: "Disney Classic Storybook Collection",
-      author: "Matt Ridley",
-      cover: "https://books.disney.com/content/uploads/2021/06/1368065791-scaled.jpg",
-    },
-    {
-      title: "Animals Storybook Collection",
-      author: "Paul Jarvis",
-      cover: "https://images.booksense.com/images/980/041/9781368041980.jpg",
-    },
-    {
-      title: "Storybook Collection",
-      author: "James Clear",
-      cover: "https://m.media-amazon.com/images/I/915qUAO-2-L._AC_UF1000,1000_QL80_.jpg",
-    }
-  ];
+
 
   const additionalBooks = [...initialBooks];
   const displayedBooks = showAll ? [...initialBooks, ...additionalBooks] : initialBooks;
