@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { LuArrowDownNarrowWide } from "react-icons/lu";
+import { allBooks } from "../../../AllAPI/api";
 
 const Books = () => {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -15,50 +16,7 @@ const Books = () => {
     "Geography",
   ];
 
-  const allBooks = [
-    {
-      title: "The Bees",
-      author: "Laline Paull",
-      cover: "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1384018069i/18652002.jpg",
-      category: "Sci-Fi",
-      rating: 4.5,
-    },
-    {
-      title: "Real Help",
-      author: "Ayodeji Awosika",
-      cover: "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1578598360i/50372880.jpg",
-      category: "Business",
-      rating: 4.2,
-    },
-    {
-      title: "The Fact of a Body",
-      author: "Alexandria Marzano-Lesnevich",
-      cover: "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1496316115i/32076678.jpg",
-      category: "Drama",
-      rating: 4.8,
-    },
-    {
-      title: "The Room",
-      author: "Jonas Karlsson",
-      cover: "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1394827919i/17830958.jpg",
-      category: "Fantasy",
-      rating: 4.3,
-    },
-    {
-      title: "Through the Breaking",
-      author: "Cate Emond",
-      cover: "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1482291062i/33117798.jpg",
-      category: "Education",
-      rating: 4.6,
-    },
-    {
-      title: "World Atlas",
-      author: "John Smith",
-      cover: "https://m.media-amazon.com/images/I/81CUJcDrowL._AC_UF1000,1000_QL80_.jpg",
-      category: "Geography",
-      rating: 4.4,
-    },
-  ];
+  
 
   const filteredBooks =
     activeCategory === "All"
