@@ -15,14 +15,13 @@ import Profile from "../../../assets/images/profile.png";
 import { GiCloudDownload } from "react-icons/gi";
 import { SiAudiobookshelf } from "react-icons/si";
 import Classroom from "../Classroom/Classroom";
-import Homework from "../Homework/Homework";
 import AudioBooks from "../AudioBooks/AudioBooks";
 import MyLibrary from "../MyLibrary/MyLibrary";
-import Classmates from "../Classmates/Classmates";
-import Help from "../Help/Help";
 import Suppor from "../Suppor/Suppor";
 import Logout from "../Logout/Logout";
 import Setting from "../SettingPaage/Setting";
+import Download from "../Download/Download";
+import Favorite from "../Favorite/Favorite";
 
 const Sidebar = () => {
   const [activeSection, setActiveSection] = useState("Classroom");
@@ -60,13 +59,13 @@ const Sidebar = () => {
       case "Discover":
         return <Classroom />;
       case "Download":
-        return <Homework />;
+        return <Download />;
       case "Audio Books":
         return <AudioBooks />;
       case "My Library":
         return <MyLibrary />;
       case "Favorite":
-        return <Classmates />;
+        return <Favorite />;
       case "Settings":
         return <Setting />;
       case "Suppor":
