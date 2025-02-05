@@ -16,8 +16,6 @@ const Books = () => {
     "Geography",
   ];
 
-  
-
   const filteredBooks =
     activeCategory === "All"
       ? allBooks

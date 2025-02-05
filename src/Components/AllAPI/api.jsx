@@ -1,4 +1,4 @@
-// api.jsx
+
 export const audiobooks = [
     {
       id: 1,
@@ -139,6 +139,128 @@ export const audiobooks = [
           category: "Geography",
           rating: 4.4,
         },
-      ]
+      ];
+
+
+
+   export   const  myFavoriteBooksData = [
+        {
+          id: 1,
+          title: "The Bees",
+          author: "Laline Paull",
+          cover: "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1384018069i/18652002.jpg",
+          category: "Sci-Fi",
+          rating: 4.5,
+          dateAdded: "2024-01-15",
+          readingStatus: "Currently Reading",
+          progress: "45%",
+          personalNotes: "Fascinating perspective on bee society",
+          libraryStatus: "Available",
+        },
+        {
+          id: 2,
+          title: "Real Help",
+          author: "Ayodeji Awosika",
+          cover: "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1578598360i/50372880.jpg",
+          category: "Business",
+          rating: 4.2,
+          dateAdded: "2024-02-01",
+          readingStatus: "Want to Read",
+          personalNotes: "Recommended by colleague",
+          libraryStatus: "Available",
+        },
+        {
+          id: 3,
+          title: "The Fact of a Body",
+          author: "Alexandria Marzano-Lesnevich",
+          cover: "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1496316115i/32076678.jpg",
+          category: "Drama",
+          rating: 4.8,
+          dateAdded: "2024-01-20",
+          readingStatus: "Finished",
+          dateFinished: "2024-02-01",
+          personalNotes: "Powerful and moving story",
+          libraryStatus: "Available",
+        },
+      ];
+
+
+
+    export  const books = [
+        {
+          id: 1,
+          title: "Atomic Habits",
+          author: "James Clear",
+          cover: "https://assets.penguinrandomhouse.com/wp-content/uploads/2022/03/07110351/PRH-Atomic-Habits-Excerpt-Article-Header-1080x1080-1.jpg"
+        },
+        {
+          id: 2,
+          title: "The Subtle Art of Not Giving a F*ck",
+          author: "Mark Manson",
+          cover: "https://bookloftlb.com/cdn/shop/files/SUBTLE_ART_OF_NOT_GIVING_A_FUCK.png?v=1716810277&width=480"
+        },
+        {
+          id: 3,
+          title: "Becoming",
+          author: "Michelle Obama",
+          cover: "https://prh.imgix.net/articles/Becoming_Social_1600x800px_1.jpg"
+        },
+        {
+          id: 4,
+          title: "Think and Grow Rich",
+          author: "Napoleon Hill",
+          cover: "/api/placeholder/200/300"
+        },
+        {
+          id: 5,
+          title: "Rich Dad Poor Dad",
+          author: "Robert Kiyosaki",
+          cover: "/api/placeholder/200/300"
+        },
+        {
+          id: 6,
+          title: "The Psychology of Money",
+          author: "Morgan Housel",
+          cover: "/api/placeholder/200/300"
+        },
+        {
+          id: 7,
+          title: "The 48 Laws of Power",
+          author: "Robert Greene",
+          cover: "/api/placeholder/200/300"
+        },
+        {
+          id: 8,
+          title: "Deep Work",
+          author: "Cal Newport",
+          cover: "/api/placeholder/200/300"
+        },
+        {
+          id: 9,
+          title: "The Power of Now",
+          author: "Eckhart Tolle",
+          cover: "/api/placeholder/200/300"
+        },
+        {
+          id: 10,
+          title: "The Alchemist",
+          author: "Paulo Coelho",
+          cover: "/api/placeholder/200/300"
+        },
+        {
+          id: 11,
+          title: "Sapiens",
+          author: "Yuval Noah Harari",
+          cover: "/api/placeholder/200/300"
+        },
+        {
+          id: 12,
+          title: "The 7 Habits of Highly Effective People",
+          author: "Stephen Covey",
+          cover: "/api/placeholder/200/300"
+        }
+      ];
+      
+      
   
-  export default { audiobooks, bestbooks, initialBooks, allBooks };
+  export default { audiobooks, bestbooks, initialBooks, allBooks,  myFavoriteBooksData, books };
