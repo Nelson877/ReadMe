@@ -13,13 +13,13 @@ const Routers = () => {
   return (
     <Router>
       <Routes>
-      <Route path="/user-readme-dash-board" element={<Home />} />
+      <Route path="/" element={<Home />} />
         <Route path="/login-form" element={<LoginForm />} />
         <Route path="/forgot-password" element={<Forgot />} />
         <Route path="/new-student" element={<Register />} />
         <Route path="/library-card" element={<LibraryCard />} />
         <Route path="/get-library-id-now" element={<LibraryId />} />
-        <Route path="/" element={<Dashboard />} />
+        <Route path="/user-readme-dash-board" element={<Dashboard />} />
       </Routes>
     </Router>
   );

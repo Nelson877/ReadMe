@@ -41,7 +41,7 @@ const LoginForm = () => {
               Welcome back to your reading journey
             </h1>
             <p className='text-slate-600 text-lg'>
-              Login to continue your learning adventure
+              Login to continue your reading adventure
             </p>
           </div>
 
