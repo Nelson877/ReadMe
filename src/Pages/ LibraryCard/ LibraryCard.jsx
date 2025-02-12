@@ -5,8 +5,8 @@ const LibraryCard = () => {
   const [libraryId, setLibraryId] = useState('');
   const [error, setError] = useState('');
 
-  // API URL from environment variable
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+  // API URL from Vite environment variable
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -38,7 +38,6 @@ const LibraryCard = () => {
     }
   };
 
-  // Rest of the JSX remains the same
   return (
     <div className="min-h-screen bg-white flex">
       <div className="flex-1 max-w-5xl mx-auto grid md:grid-cols-2 items-center gap-16 p-8">
