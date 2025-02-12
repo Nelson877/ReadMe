@@ -7,17 +7,30 @@ const app = express();
 
 // Middleware
 app.use(express.json());
+
+// CORS configuration
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://localhost:5174',
+  'https://read-me-git-fixing-ba-eb4f27-dziksonnelson877gmailcoms-projects.vercel.app',
+  // Vercel deployment URLs you have
+  'https://read-me-eight-alpha.vercel.app/'
+];
+
 app.use(cors({
-  origin: [
-    'http://localhost:3000', 
-    'http://localhost:5174',
-    // Add your Vercel frontend URL here
-    'https://read-me-eight-alpha.vercel.app/',
-    // If you have a custom domain, add it here
-    'https://read-me-eight-alpha.vercel.app/'
-  ],
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true
+  origin: function(origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  credentials: true,
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 // MongoDB connection
@@ -33,8 +46,8 @@ mongoose
 const authRoutes = require("./routes/auth.routes");
 app.use("/api/auth", authRoutes);
 
-// Add a health check endpoint
-app.get("/api/health", (req, res) => {
+// Health check endpoint
+app.get("/health", (req, res) => {
   res.status(200).json({ status: "ok" });
 });
 
