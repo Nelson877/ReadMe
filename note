@@ -1,0 +1,15 @@
+Express.js for the backend framework✅
+MongoDB or PostgreSQL for database✅
+JWT for authentication
+Bcrypt for password hashing
+Multer for file uploads (for book covers/PDFs)
+
+
+Essential APIs you'll need:
+
+User authentication (signup/login)
+Book management (CRUD operations)
+Book search and filtering
+Borrowing system
+User management
+File upload for books/resources
