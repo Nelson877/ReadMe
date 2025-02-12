@@ -7,6 +7,9 @@ const LibraryId = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [error, setError] = useState('');
 
+  // API URL from environment variable
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+
   // Function to generate library ID from full name and phone number
   const generateLibraryId = (name, phone) => {
     if (!name || !phone) return '';
@@ -47,7 +50,7 @@ const LibraryId = () => {
     setError('');
 
     try {
-      const response = await fetch('http://localhost:5000/api/auth/library-get-id', {
+      const response = await fetch(`${API_URL}/api/auth/library-get-id`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -74,6 +77,7 @@ const LibraryId = () => {
     }
   };
 
+  // Rest of the JSX remains the same
   return (
     <div className="min-h-screen bg-white flex">
       <div className="flex-1 max-w-5xl mx-auto grid md:grid-cols-2 items-center gap-16 p-8">
