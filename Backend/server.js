@@ -8,7 +8,14 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:5174'], // Allow multiple frontend origins
+  origin: [
+    'http://localhost:3000', 
+    'http://localhost:5174',
+    // Add your Vercel frontend URL here
+    'https://read-me-eight-alpha.vercel.app/',
+    // If you have a custom domain, add it here
+    'https://read-me-eight-alpha.vercel.app/'
+  ],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true
 }));
@@ -25,6 +32,11 @@ mongoose
 // Import routes
 const authRoutes = require("./routes/auth.routes");
 app.use("/api/auth", authRoutes);
+
+// Add a health check endpoint
+app.get("/api/health", (req, res) => {
+  res.status(200).json({ status: "ok" });
+});
 
 // Error handling middleware
 app.use((err, req, res, next) => {

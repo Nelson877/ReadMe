@@ -5,13 +5,16 @@ const LibraryCard = () => {
   const [libraryId, setLibraryId] = useState('');
   const [error, setError] = useState('');
 
+  // API URL from environment variable
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+
   const handleRegister = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setError('');
 
     try {
-      const response = await fetch('http://localhost:5000/api/auth/library-start-reading', {
+      const response = await fetch(`${API_URL}/api/auth/library-start-reading`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -35,6 +38,7 @@ const LibraryCard = () => {
     }
   };
 
+  // Rest of the JSX remains the same
   return (
     <div className="min-h-screen bg-white flex">
       <div className="flex-1 max-w-5xl mx-auto grid md:grid-cols-2 items-center gap-16 p-8">
