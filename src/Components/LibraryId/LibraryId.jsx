@@ -7,8 +7,8 @@ const LibraryId = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [error, setError] = useState('');
 
-  // API URL from environment variable
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+  // API URL from Vite environment variable
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
   // Function to generate library ID from full name and phone number
   const generateLibraryId = (name, phone) => {
@@ -65,7 +65,6 @@ const LibraryId = () => {
       const data = await response.json();
 
       if (response.ok) {
-        // Redirect to library card page on success
         window.location.href = '/library-card';
       } else {
         throw new Error(data.message || 'Registration failed');
@@ -77,7 +76,6 @@ const LibraryId = () => {
     }
   };
 
-  // Rest of the JSX remains the same
   return (
     <div className="min-h-screen bg-white flex">
       <div className="flex-1 max-w-5xl mx-auto grid md:grid-cols-2 items-center gap-16 p-8">
