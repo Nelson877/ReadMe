@@ -71,7 +71,7 @@ const Hero = () => {
 
         <buttonn
           onClick={() => navigate("/login-form")}
-          className='bg-orange-500 text-white px-8 py-3 rounded-lg hover:bg-orange-600 transition-colors'
+          className='bg-orange-500 text-white px-8 py-3 cursor-pointer rounded-lg hover:bg-orange-600 transition-colors'
         >
           START READING
         </buttonn>
