@@ -1,24 +1,52 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from 'react';
 import Loading from "../../Components/Loading/Loading";
-import { IoEyeOffOutline } from "react-icons/io5";
-import { FaRegEye } from "react-icons/fa6";
 import ReadingImage from "../../assets/images/reaading.png";
 
 const Register = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    mobileNumber: ''
+  });
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError('');
+
+    try {
+      const response = await fetch(`${API_URL}/api/auth/register`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify(formData)
+      });
+
+      const responseText = await response.text();
+      let data;
+      try {
+        data = JSON.parse(responseText);
+      } catch {
+        throw new Error('Server response was not valid JSON');
+      }
+
+      if (!response.ok) throw new Error(data.message || 'Registration failed');
+      window.location.href = '/adding-new-reader';
+    } catch (error) {
+      setError(error.message || 'Registration failed. Please try again.');
+    } finally {
       setIsLoading(false);
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (isLoading) {
-    return <Loading />;
-  }
+    }
+  };
 
   return (
     <div className='min-h-screen bg-white flex'>
@@ -28,56 +56,84 @@ const Register = () => {
             <h1 className='text-3xl md:text-4xl font-semibold text-slate-800 leading-tight'>
               Register to start your reading journey
             </h1>
-            {/* <p className='text-slate-600 text-lg'>
-              Register to continue your learning adventure
-            </p> */}
+            <p className='text-slate-600 text-lg'>Parent | Guardian Details</p>
           </div>
 
-          <form className='space-y-6'>
-            <div className='space-y-4'>
+          <form onSubmit={handleSubmit} className='space-y-6'>
+            <div className='flex space-x-4 justify-center items-center'>
               <div>
                 <label className='text-sm font-medium text-slate-600'>
-                  Student ID
+                  Parent's First Name
                 </label>
                 <input
                   type='text'
-                  placeholder='Enter your student ID'
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  placeholder='John'
                   className='w-full mt-2 p-3 border-b-2 border-slate-200 focus:border-orange-500 outline-none text-slate-800 transition-colors'
+                  required
                 />
               </div>
-
               <div>
                 <label className='text-sm font-medium text-slate-600'>
-                  Password
+                  Parent's Last Name
                 </label>
-                <div className='relative'>
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    placeholder='Enter your password'
-                    className='w-full mt-2 p-3 border-b-2 border-slate-200 focus:border-orange-500 outline-none text-slate-800 transition-colors'
-                  />
-                  <button
-                    type='button'
-                    onClick={() => setShowPassword(!showPassword)}
-                    className='absolute right-3 top-[60%] -translate-y-1/2 text-slate-400 hover:text-slate-600'
-                  >
-                    {showPassword ? (
-                      <IoEyeOffOutline size={20} />
-                    ) : (
-                      <FaRegEye size={20} />
-                    )}
-                  </button>
-                </div>
+                <input
+                  type='text'
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  placeholder='Doe'
+                  className='w-full mt-2 p-3 border-b-2 border-slate-200 focus:border-orange-500 outline-none text-slate-800 transition-colors'
+                  required
+                />
+              </div>
+            </div>
+            <div className='flex space-x-4 justify-center items-center'>
+              <div>
+                <label className='text-sm font-medium text-slate-600'>
+                  Parent's Email Address
+                </label>
+                <input
+                  type='email'
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder='doe@example.com'
+                  className='w-full mt-2 p-3 border-b-2 border-slate-200 focus:border-orange-500 outline-none text-slate-800 transition-colors'
+                  required
+                />
+              </div>
+              <div>
+                <label className='text-sm font-medium text-slate-600'>
+                  Mobile Number
+                </label>
+                <input
+                  type='tel'
+                  name="mobileNumber"
+                  value={formData.mobileNumber}
+                  onChange={handleChange}
+                  placeholder='020-002-0222'
+                  className='w-full mt-2 p-3 border-b-2 border-slate-200 focus:border-orange-500 outline-none text-slate-800 transition-colors'
+                  required
+                />
               </div>
             </div>
 
-            <button className='w-full p-4 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition-colors font-medium'>
-              Register
+            {error && <p className="text-red-500">{error}</p>}
+
+            <button 
+              type="submit" 
+              className='w-full p-4 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition-colors font-medium'
+              disabled={isLoading}
+            >
+              {isLoading ? 'Registering...' : 'Continue'}
             </button>
 
-            <div className='text-center '>
+            <div className='text-center'>
               <div className='text-slate-600'>
-                Already having an account ?{" "}
+                Already having student ID?{" "}
                 <a
                   href='/login-form'
                   className='text-orange-500 hover:text-orange-400 font-medium'

@@ -58,69 +58,31 @@ const LoginForm = () => {
                 />
               </div>
 
-              <div>
-                <label className='text-sm font-medium text-slate-600'>
-                  Password
-                </label>
-                <div className='relative'>
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    placeholder='Enter your password'
-                    className='w-full mt-2 p-3 border-b-2 border-slate-200 focus:border-orange-500 outline-none text-slate-800 transition-colors'
-                  />
-                  <button
-                    type='button'
-                    onClick={() => setShowPassword(!showPassword)}
-                    className='absolute right-3 top-[60%] -translate-y-1/2 text-slate-400 hover:text-slate-600'
-                  >
-                    {showPassword ? (
-                      <FaRegEye size={20} />
-                    ) : (
-                      <IoEyeOffOutline size={20} />
-                    )}
-                  </button>
-                </div>
-              </div>
+             
             </div>
 
-            <button className='w-full p-4 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition-colors font-medium'>
-              Login
-            </button>
-
-            <div className='relative'>
-              <div className='absolute inset-0 flex items-center'>
-                <div className='w-full border-t border-slate-200'></div>
-              </div>
-              <div className='relative flex justify-center'>
-                <span className='bg-white px-4 text-sm text-slate-500'>
-                  Or sign in with
-                </span>
-              </div>
-            </div>
-
+          
             <div className='grid grid-cols-2 gap-4'>
-              <button
-                onClick={handleSchoolAccountClick}
-                className='p-3 border-2 border-slate-200 rounded-full text-slate-700 hover:bg-slate-50 transition-colors font-medium'
-              >
-                School Account
-              </button>
-              <button
-                onClick={handleLibraryCardClick}
-                className='p-3 border-2 border-slate-200 rounded-full text-slate-700 hover:bg-slate-50 transition-colors font-medium'
-              >
-                Library Card
-              </button>
-            </div>
+            <button className='w-full p-4 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition-colors font-medium'>
+              Start Reading
+            </button>
+             <button
+               onClick={handleLibraryCardClick}
+               className='p-3 border-2 border-slate-200 rounded-full text-slate-700 hover:bg-slate-50 transition-colors font-medium'
+             >
+               Library Card
+             </button>
+           </div>
 
-            <div className='text-center space-y-3 pt-4'>
+          
+            <div className='text-center pt-2'>
               <a
                 href='/forgot-password'
-                className='text-slate-600 hover:text-orange-500 block'
+                className='text-slate-600 text-sm hover:text-orange-500 block'
               >
-                Forgot your password?
+                Forgot your student ID?
               </a>
-              <div className='text-slate-600'>
+              <div className='text-slate-600 text-sm'>
                 New student?{" "}
                 <a
                   href='/new-student'
