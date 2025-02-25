@@ -7,6 +7,7 @@ import LibraryCard from '../Pages/ LibraryCard/ LibraryCard';
 import LibraryId from '../Components/LibraryId/LibraryId';
 import Home from '../Pages/Home/Home';
 import Dashboard from '../Pages/Dashboard/Dashboard';
+import AddReader from '../Components/AddReader/AddReader';
 
 
 const Routers = () => {
@@ -17,6 +18,7 @@ const Routers = () => {
         <Route path="/login-form" element={<LoginForm />} />
         <Route path="/forgot-password" element={<Forgot />} />
         <Route path="/new-student" element={<Register />} />
+        <Route path="/adding-new-reader" element={<AddReader />} />
         <Route path="/library-card" element={<LibraryCard />} />
         <Route path="/get-library-id-now" element={<LibraryId />} />
         <Route path="/user-readme-dash-board" element={<Dashboard />} />

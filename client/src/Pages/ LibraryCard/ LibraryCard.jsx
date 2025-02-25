@@ -12,7 +12,7 @@ const LibraryCard = () => {
     e.preventDefault();
     setIsLoading(true);
     setError('');
-
+  
     try {
       const response = await fetch(`${API_URL}/api/auth/library-start-reading`, {
         method: 'POST',
@@ -22,15 +22,14 @@ const LibraryCard = () => {
         credentials: 'include',
         body: JSON.stringify({ libraryId: libraryId.trim() })
       });
-
+  
       const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || 'Registration failed');
+  
+      if (data.success) {
+        window.location.href = '/user-readme-dash-board';
+      } else {
+        throw new Error(data.message);
       }
-
-      // Redirect to dashboard on success
-      window.location.href = '/user-readme-dash-board';
     } catch (error) {
       setError(error.message || 'Registration failed. Please try again.');
     } finally {
