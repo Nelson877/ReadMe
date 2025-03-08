@@ -10,7 +10,7 @@ const Nav = () => {
         <span className='text-2xl font-bold text-orange-500'>ReadMe</span>
       </div>
       <button
-        onClick={() => navigate("/")}
+        onClick={() => navigate("/privacy-help")}
         className='bg-orange-500 text-white px-6 py-2 rounded-md hover:bg-orange-600 transition-colors font-medium'
       >
        Privacy Help

@@ -7,6 +7,11 @@ const AddReader = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [showKidId, setShowKidId] = useState(false);
   const [kidId, setKidId] = useState("");
+  const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  // Define API base URL - adjust this to match your backend
+  const API_URL = 'http://localhost:5000'; // Your Express server port
   
   // Form state
   const [formData, setFormData] = useState({
@@ -40,24 +45,54 @@ const AddReader = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
+    setIsSubmitting(true);
     
-    // Generate a random ID for the kid
-    const generatedId = "KID-2025-" + Math.floor(1000 + Math.random() * 9000);
-    setKidId(generatedId);
+    // Debug log
+    console.log("Submitting to:", `${API_URL}/api/addNewReader/add-new-reader`);
+    console.log("Form data:", formData);
     
-    // Show the success modal
-    setShowKidId(true);
-    
-    // In a real application, you would send this data to your backend
-    console.log("Form submitted:", formData, "Kid ID:", generatedId);
+    try {
+      // Fix: Use the correct route based on your server.js configuration
+      const response = await fetch(`${API_URL}/api/addNewReader/add-new-reader`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify(formData)
+      });
+      
+      // Debug log
+      console.log("Response status:", response.status);
+      
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || `Server responded with status: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      console.log("Response data:", data);
+      
+      // Set the kid ID from the API response
+      setKidId(data.reader.kidId);
+      
+      // Show the success modal
+      setShowKidId(true);
+      
+      console.log("Reader registered successfully:", data);
+    } catch (error) {
+      console.error("Error registering reader:", error);
+      setError(error.message || "Failed to register reader. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const closeKidIdModal = () => {
     setShowKidId(false);
-    // Optionally reset the form here if needed
-    // setFormData({ firstName: "", lastName: "", school: "", grade: "", gender: "" });
+    // Reset the form after successful submission
+    setFormData({ firstName: "", lastName: "", school: "", grade: "", gender: "" });
   };
 
   if (isLoading) {
@@ -74,6 +109,12 @@ const AddReader = () => {
             </h1>
             <p className='text-slate-600 text-lg'>Kids Details</p>
           </div>
+
+          {error && (
+            <div className="p-3 bg-red-100 text-red-700 rounded-md">
+              {error}
+            </div>
+          )}
 
           <form className='space-y-6' onSubmit={handleSubmit}>
             <div className='flex space-x-4 justify-center items-center'>
@@ -178,8 +219,12 @@ const AddReader = () => {
               </div>
             </div>
 
-            <button type="submit" className='w-full p-4 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition-colors font-medium'>
-              Get kid's ID
+            <button 
+              type="submit" 
+              className='w-full p-4 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition-colors font-medium'
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? 'Processing...' : 'Get kid\'s ID'}
             </button>
 
             <div className='text-center'>

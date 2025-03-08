@@ -8,6 +8,7 @@ import LibraryId from '../Components/LibraryId/LibraryId';
 import Home from '../Pages/Home/Home';
 import Dashboard from '../Pages/Dashboard/Dashboard';
 import AddReader from '../Components/AddReader/AddReader';
+import PrivacyHelp from '../Components/UI/PrivacyHelp';
 
 
 const Routers = () => {
@@ -22,6 +23,7 @@ const Routers = () => {
         <Route path="/library-card" element={<LibraryCard />} />
         <Route path="/get-library-id-now" element={<LibraryId />} />
         <Route path="/user-readme-dash-board" element={<Dashboard />} />
+        <Route path="/privacy-help" element={<PrivacyHelp />} />
       </Routes>
     </Router>
   );
