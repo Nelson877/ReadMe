@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Loading from "../Loading/Loading";
+import { useNavigate } from "react-router-dom";
 
 const PrivacyHelp = () => {
   const [isLoading, setLoading] = useState(true);
+  const navigate = useNavigate();
   
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -19,7 +21,7 @@ const PrivacyHelp = () => {
     <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
       {/* Back button added to the top left */}
       <div className="mb-4">
-        <button className="flex items-center text-orange-500 hover:text-orange-700 transition-colors">
+        <button   onClick={() => navigate("/")} className="flex items-center text-orange-500 hover:text-orange-700 transition-colors">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
