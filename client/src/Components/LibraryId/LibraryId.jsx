@@ -6,64 +6,127 @@ const LibraryId = () => {
   const [fullName, setFullName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [error, setError] = useState('');
+  const [phoneError, setPhoneError] = useState('');
 
+  // API URL from environment or default
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
-  const generateLibraryId = (name, phone) => {
-    if (!name || !phone) return '';
+  // Generate a secure random number (10 digits)
+  const generateRandomNumbers = () => {
+    return Math.floor(1000000000 + Math.random() * 9000000000).toString();
+  };
+
+  // Generate Library ID based on name
+  const generateLibraryId = (name) => {
+    if (!name) return '';
     
     const names = name.trim().split(' ');
     if (names.length < 2) return '';
 
     const firstInitial = names[0][0]?.toUpperCase() || '';
     const lastInitial = names[names.length - 1][0]?.toUpperCase() || '';
-    const cleanPhone = phone.replace(/\D/g, '');
+    
+    const randomDigits = generateRandomNumbers();
 
-    if (cleanPhone.length !== 10) return '';
-
-    return `${firstInitial}${lastInitial}-${cleanPhone}`;
+    return `${firstInitial}${lastInitial}-${randomDigits}`;
   };
 
+  // Generate Library ID when full name changes
   useEffect(() => {
-    setLibraryId(generateLibraryId(fullName, phoneNumber));
-  }, [fullName, phoneNumber]);
+    if (fullName) {
+      setLibraryId(generateLibraryId(fullName));
+    }
+  }, [fullName]);
 
-  const formatPhoneNumber = (value) => {
-    const cleaned = value.replace(/\D/g, '');
-    const match = cleaned.match(/^(\d{0,3})(\d{0,3})(\d{0,4})$/);
-    if (!match) return value;
-    return `${match[1]}${match[2] ? '-' : ''}${match[2]}${match[3] ? '-' : ''}${match[3]}`;
+  // Validate Ghanaian phone number
+  const validatePhoneNumber = (phone) => {
+    // Remove all non-digit characters
+    const cleanedPhone = phone.replace(/\D/g, '');
+    
+    // Check if the phone number is exactly 10 digits
+    if (cleanedPhone.length !== 10) {
+      return false;
+    }
+    
+    // Ensure the phone number starts with valid Ghanaian mobile prefixes
+    const validPrefixes = ['020', '024', '050', '054', '055', '059'];
+    const prefix = cleanedPhone.slice(0, 3);
+    
+    return validPrefixes.includes(prefix);
   };
 
+  // Format phone number for clean input
+  const formatPhoneNumber = (value) => {
+    // Remove all non-digit characters
+    const cleaned = value.replace(/\D/g, '');
+    
+    // Limit to 10 digits
+    return cleaned.slice(0, 10);
+  };
+
+  // Handle phone number input changes
   const handlePhoneChange = (e) => {
-    setPhoneNumber(formatPhoneNumber(e.target.value));
+    const formattedPhone = formatPhoneNumber(e.target.value);
+    setPhoneNumber(formattedPhone);
+    
+    // Validation message for Ghanaian phone numbers
+    if (!validatePhoneNumber(formattedPhone)) {
+      setPhoneError('Invalid phone number. Must be 10 digits with valid Ghanaian prefix.');
+    } else {
+      setPhoneError('');
+    }
   };
 
   const handleRegister = async (e) => {
     e.preventDefault();
+  
+    if (!validatePhoneNumber(phoneNumber)) {
+      setPhoneError('Invalid phone number. Must be 10 digits with valid prefix.');
+      return;
+    }
+  
     setIsLoading(true);
     setError('');
+    setPhoneError('');
   
     try {
+      const cleanedPhoneNumber = phoneNumber.replace(/\D/g, '');
       const response = await fetch(`${API_URL}/api/library/library-get-id`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ libraryId, fullName, phoneNumber }),
+        credentials: 'include',
+        body: JSON.stringify({
+          libraryId,
+          fullName,
+          phoneNumber: cleanedPhoneNumber,
+        }),
       });
   
-      const data = await response.json();
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || `HTTP error! Status: ${response.status}`);
+      }
   
-      if (data.success) {
+      const responseData = await response.json();
+      if (responseData.success) {
         window.location.href = '/library-card';
       } else {
-        throw new Error(data.message);
+        throw new Error(responseData.message || 'Registration failed');
       }
     } catch (error) {
-      setError(error.message || 'Registration failed');
+      console.error('Full Registration Error:', error);
+      setError(error.message || 'Network error. Please try again.');
     } finally {
       setIsLoading(false);
+    }
+  };
+  
+  // Regenerate Library ID
+  const handleRegenerateId = () => {
+    if (fullName) {
+      setLibraryId(generateLibraryId(fullName));
     }
   };
 
@@ -76,8 +139,8 @@ const LibraryId = () => {
           </h1>
 
           <form className="space-y-6" onSubmit={handleRegister}>
-            <div className="flex gap-10">
-              <div>
+            <div className="flex flex-col md:flex-row gap-6">
+              <div className="flex-1">
                 <label className="text-sm font-medium text-slate-600">Full Name</label>
                 <input
                   type="text"
@@ -89,22 +152,32 @@ const LibraryId = () => {
                 />
               </div>
 
-              <div>
+              <div className="flex-1">
                 <label className="text-sm font-medium text-slate-600">Phone Number</label>
                 <input
                   type="tel"
-                  placeholder="123-456-7890"
+                  placeholder="020-800-9524"
                   className="w-full mt-2 p-3 border-b-2 border-slate-200 focus:border-orange-500 outline-none text-slate-800"
                   value={phoneNumber}
                   onChange={handlePhoneChange}
-                  maxLength="12"
+                  maxLength="10"
                   required
                 />
+                {phoneError && <p className="text-red-500 text-sm mt-1">{phoneError}</p>}
               </div>
             </div>
 
             <div>
-              <label className="text-sm font-medium text-slate-600">Your Library ID</label>
+              <div className="flex justify-between items-center">
+                <label className="text-sm font-medium text-slate-600">Your Library ID</label>
+                <button 
+                  type="button"
+                  onClick={handleRegenerateId}
+                  className="text-sm text-orange-500 hover:text-orange-600"
+                >
+                  Generate New ID
+                </button>
+              </div>
               <input
                 type="text"
                 className="w-full mt-2 p-3 bg-slate-50 border-b-2 border-slate-200 outline-none text-slate-800"
@@ -112,7 +185,7 @@ const LibraryId = () => {
                 readOnly
               />
               <p className="text-sm text-slate-500 mt-1">
-                Auto-generated based on your name and phone number
+                This is your secure library ID using your initials. Please save it for future logins.
               </p>
             </div>
 
@@ -121,7 +194,7 @@ const LibraryId = () => {
             <button 
               type="submit" 
               className="w-full p-4 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition-colors font-medium disabled:opacity-50"
-              disabled={!libraryId}
+              disabled={!libraryId || !fullName || !phoneNumber || !!phoneError}
             >
               {isLoading ? 'Registering...' : 'Get Started'}
             </button>
