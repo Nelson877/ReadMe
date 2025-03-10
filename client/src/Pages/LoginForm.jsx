@@ -164,7 +164,7 @@ const LoginForm = () => {
                     
             <div className='text-center pt-2'>
               <a
-                href='/forgot-password'
+                href='/forgot-kids-id'
                 className='text-slate-600 text-sm hover:text-orange-500 block'
               >
                 Forgot kid's ID?
@@ -176,7 +176,7 @@ const LoginForm = () => {
                   onClick={handleNewStudentClick}
                   className='text-orange-500 hover:text-orange-400 font-medium'
                 >
-                  Register your kid ID
+                  Get your kid ID
                 </a>
               </div>
             </div>
